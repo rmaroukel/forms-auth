@@ -37,9 +37,6 @@ export default function SignUpForm() {
       setError(error.message)
     }
   }
-
-
-
   
   return (
     <>
