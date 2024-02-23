@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const BASE_URL = 'https://fsa-jwt-practice.herokuapp.com/signup'
-export default function SignUpForm() {
+export default function SignUpForm({setToken}) {
   const [username, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
@@ -12,12 +12,6 @@ export default function SignUpForm() {
     password
   }
 
-  async function fetchUserAuth() {
-    const response = await axios.get(BASE_URL)
-    console.log(response)
-    
-  }
-
   async function createUser(){
     const response = await axios.post(BASE_URL, {
       headers: { 
@@ -25,7 +19,8 @@ export default function SignUpForm() {
       },
       body: payLoad
     })
-    console.log(response)
+    const result = await response.data
+    setToken(result.token)
   }
     
   async function handleSubmit(event) {
